@@ -1,0 +1,32 @@
+.align-horizontally, .align-vertically {
+  display: flex;
+  justify-content: center; }
+
+.align-vertically {
+  align-items: center; }
+
+html {
+  scroll-behavior: smooth; }
+
+body {
+  background-color: #222831;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0; }
+
+main {
+  width: 80%;
+  margin: auto; }
+
+header {
+  color: #fd7014; }
+
+.menu {
+  justify-content: center; }
+
+.question-card {
+  display: none; }
+  .question-card p {
+    color: #fd7014; }

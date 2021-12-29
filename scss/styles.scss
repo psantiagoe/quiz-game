@@ -1,0 +1,38 @@
+@import "./imports/_variables.scss";
+@import "./imports/_general-classes.scss";
+
+// General
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: $principalBgColor;
+	font-family: $principalFont;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+}
+
+main {
+	width: 80%;
+	margin: auto;
+}
+
+// header
+header {
+	color: $primaryColor;
+}
+.menu {
+	justify-content: center;
+}
+
+// main
+
+.question-card {
+	display: none;
+	p {
+		color: $primaryColor;
+	}
+}
