@@ -26,7 +26,13 @@ header {
 .menu {
   justify-content: center; }
 
-.question-card {
+#question-card {
   display: none; }
-  .question-card p {
+  #question-card p {
     color: #fd7014; }
+
+.btn-start {
+  text-align: center; }
+  .btn-start .btn {
+    width: 50%;
+    line-height: 3; }
