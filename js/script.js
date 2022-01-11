@@ -33,9 +33,9 @@ function Question(category, difficulty, question, correctAnswer, answers) {
 	this.answers = answers;
 }
 
-function getQuestions(url) {
+async function getQuestions(url) {
 	// get question from API
-	fetch(url)
+	await fetch(url)
 		.then((response) => response.json())
 		.then((json) => {
 			questions = [];
@@ -60,8 +60,8 @@ function getQuestions(url) {
 	}
 }
 
-function makeQuestion() {
-	getQuestions(URLAPI.noCategory);
+async function makeQuestion() {
+	await getQuestions(URLAPI.noCategory);
 
 	questions.forEach((q) => {
 		answer = prompt(`${q.question}\n\nType the correct one:\n\n${q.answers.join("\n")}`);
