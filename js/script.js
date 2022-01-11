@@ -13,7 +13,7 @@ const URLAPI = {
 	computers: "https://opentdb.com/api.php?amount=10&category=18&type=multiple",
 };
 
-//requestsPlayerName();
+requestsPlayerName();
 
 function requestsPlayerName() {
 	playerName = prompt("Insert your name");
