@@ -30,17 +30,38 @@ header {
 
 // main
 
-#question-card {
-	display: none;
-	p {
+#status {
+	text-align: right;
+
+	.status-text {
 		color: $primaryColor;
+		font-size: large;
+		line-height: 0.5;
 	}
 }
 
-.btn-start {
+#question-card {
+	// display: none;
+	margin: auto;
+	width: 70%;
+
+	h1 {
+		color: $primaryColor;
+		text-align: center;
+	}
+
+	a {
+		display: block;
+		margin-bottom: 15px;
+	}
+}
+
+#btn-start {
 	text-align: center;
+
 	.btn {
-		width: 50%;
+		width: 30%;
 		line-height: 3;
+		font-size: x-large;
 	}
 }

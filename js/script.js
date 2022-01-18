@@ -23,6 +23,10 @@ function requestsPlayerName() {
 function showPlayerName() {
 	// Mostrar el nombre del jugador en pantalla editando el texto de #player
 	alert(`Welcome ${playerName} to Quiz game`);
+
+	let player = document.getElementById("player");
+
+	player.innerHTML = `Player: ${playerName}`;
 }
 
 function Question(category, difficulty, question, correctAnswer, answers) {
@@ -54,21 +58,51 @@ async function getQuestions(url) {
 
 	// sort randomly
 	for (let i = 0; i < questions.length; i++) {
-		console.log("Antes: ", questions[i].answers); // linea para verificar el orden ANTES de ordenarlo aleatoreamente.
 		questions[i].answers = shuffler(questions[i].answers);
-		console.log("Despues: ", questions[i].answers); // linea para verificar el orden DESPUES de ordenarlo aleatoreamente.
 	}
 }
 
 async function makeQuestion() {
+	let buttonStart = document.getElementById("btn-start");
+	buttonStart = buttonStart.getElementsByClassName("btn");
+	buttonStart[0].className += " disabled";
+
+	let questionCounter = document.getElementById("question-counter");
+	let counter = 0;
+	let points = document.getElementById("points");
+	let point = 0;
+
+	let questionText = document.getElementById("question");
+
+	let options = [
+		document.getElementById("option1"),
+		document.getElementById("option2"),
+		document.getElementById("option3"),
+		document.getElementById("option4"),
+	];
+
 	await getQuestions(URLAPI.noCategory);
 
 	questions.forEach((q) => {
+		questionCounter.innerHTML = `Question ${++counter} of ${questions.length}`;
+		questionText.innerHTML = q.question;
+
+		for (let i = 0; i < q.answers.length; i++) {
+			const answer = q.answers[i];
+			options[i].innerHTML = answer;
+		}
+
 		answer = prompt(`${q.question}\n\nType the correct one:\n\n${q.answers.join("\n")}`);
 
 		answerIsCorrect = checkAnswer(answer, q.correctAnswer);
 
-		answerIsCorrect ? alert("Your answer is correct!") : alert("Your answer is incorrect, try again.");
+		if (answerIsCorrect) {
+			alert("Your answer is correct!");
+			point++;
+			points.innerHTML = `Points: ${point}`;
+		} else {
+			alert("Your answer is incorrect, try again.");
+		}
 	});
 }
 

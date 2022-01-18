@@ -49,26 +49,25 @@
     </header>
 
     <main>
-        <div id="question-card">
-            <section id="status">
-                <p class="player">Player: Santiago</p>
-                <p id="timer">Time: 00:00</p>
-                <p id="points">Points: 0</p>
-            </section>
 
-            <section id="questions">
-                <p id="question-counter">Question 1 of 10</p>
-                <p id="question-text">Question 1</p>
-            </section>
+        <section id="status">
+            <p id="player" class="status-text">Player: player-name</p>
+            <p id="timer" class="status-text">Time: 00:00</p>
+            <p id="points" class="status-text">Points: 0</p>
+            <p id="question-counter" class="status-text">Question 0 of 10</p>
+        </section>
 
-            <section id="answers">
-                <p id="answer-one">Answer 1</p>
-                <p id="answer-two">Answer 2</p>
-                <p id="answer-three">Answer 3</p>
-                <p id="answer-four">Answer 4</p>
-            </section>
-        </div>
-        <div class="btn-start">
+        <section>
+            <div id="question-card" class="card-body">
+                <h1 id="question">Question</h1>
+                <a id="option1" onclick="" class="btn btn-primary">Option 1</a>
+                <a id="option2" onclick="" class="btn btn-primary">Option 2</a>
+                <a id="option3" onclick="" class="btn btn-primary">Option 3</a>
+                <a id="option4" onclick="" class="btn btn-primary">Option 4</a>
+            </div>
+        </section>
+
+        <div id="btn-start">
             <a onclick="makeQuestion()" class="btn btn-primary">Start</a>
         </div>
     </main>

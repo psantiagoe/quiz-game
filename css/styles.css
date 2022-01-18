@@ -26,13 +26,26 @@ header {
 .menu {
   justify-content: center; }
 
-#question-card {
-  display: none; }
-  #question-card p {
-    color: #fd7014; }
+#status {
+  text-align: right; }
+  #status .status-text {
+    color: #fd7014;
+    font-size: large;
+    line-height: 0.5; }
 
-.btn-start {
+#question-card {
+  margin: auto;
+  width: 70%; }
+  #question-card h1 {
+    color: #fd7014;
+    text-align: center; }
+  #question-card a {
+    display: block;
+    margin-bottom: 15px; }
+
+#btn-start {
   text-align: center; }
-  .btn-start .btn {
-    width: 50%;
-    line-height: 3; }
+  #btn-start .btn {
+    width: 30%;
+    line-height: 3;
+    font-size: x-large; }
