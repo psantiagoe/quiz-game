@@ -20,6 +20,24 @@ main {
 	margin: auto;
 }
 
+.btn-primary {
+	background-color: $primaryColor !important;
+	border-color: $primaryColor !important;
+
+	&:hover {
+		@extend .btn-primary;
+	}
+
+	&:focus {
+		@extend .btn-primary;
+		box-shadow: none;
+	}
+}
+
+.disabled {
+	@extend .btn-primary;
+}
+
 // header
 header {
 	color: $primaryColor;
@@ -29,9 +47,42 @@ header {
 }
 
 // main
+h1 {
+	text-align: center;
+	color: $primaryColor;
+	margin-bottom: 50px;
+}
+
+#form-player {
+	text-align: center;
+
+	form {
+		.form-group {
+			margin-bottom: 20px;
+			label {
+				color: $primaryColor;
+				margin-bottom: 10px;
+			}
+
+			.form-control {
+				margin: auto;
+				width: 50%;
+			}
+		}
+	}
+
+	.btn {
+		width: 20%;
+	}
+}
 
 #status {
 	text-align: right;
+	display: none;
+
+	.player-last-points {
+		display: none;
+	}
 
 	.status-text {
 		color: $primaryColor;
@@ -40,8 +91,19 @@ header {
 	}
 }
 
+#loading-spinner {
+	display: none;
+	width: 7rem;
+	height: 7rem;
+	margin: auto;
+}
+
+.text-primary {
+	--bs-primary-rgb: 253, 112, 20;
+}
+
 #question-card {
-	// display: none;
+	display: none;
 	margin: auto;
 	width: 70%;
 
@@ -50,18 +112,45 @@ header {
 		text-align: center;
 	}
 
-	a {
-		display: block;
-		margin-bottom: 15px;
+	.options {
+		width: 50%;
+		margin: auto;
+
+		a {
+			display: block;
+			margin-bottom: 15px;
+		}
 	}
 }
 
-#btn-start {
+#start-btn-container {
+	display: none;
 	text-align: center;
 
-	.btn {
+	#start-btn {
 		width: 30%;
 		line-height: 3;
 		font-size: x-large;
 	}
+}
+
+.load-container {
+	width: 70%;
+	margin: auto;
+}
+
+.table {
+	width: 70%;
+	margin: auto;
+	td {
+		color: $primaryColor;
+	}
+
+	th {
+		@extend td;
+	}
+}
+
+.table-dark {
+	--bs-table-striped-color: #feb686;
 }

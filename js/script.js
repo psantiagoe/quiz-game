@@ -1,8 +1,6 @@
-let playerName = "";
-let playerPoints = 0;
-let answer;
-let answerIsCorrect = false;
 let questions = [];
+let counter = 0;
+let point = 0;
 
 const URLAPI = {
 	noCategory: "https://opentdb.com/api.php?amount=10&type=multiple",
@@ -13,20 +11,113 @@ const URLAPI = {
 	computers: "https://opentdb.com/api.php?amount=10&category=18&type=multiple",
 };
 
-requestsPlayerName();
+const submitName = document.getElementById("submit-name");
+if (submitName != null) {
+	submitName.addEventListener("click", showPlayerName);
+}
 
-function requestsPlayerName() {
-	playerName = prompt("Insert your name");
-	showPlayerName();
+const loadBtn = document.getElementById("load-btn");
+if (loadBtn != null) {
+	loadBtn.addEventListener("click", () => {
+		loadDashboard();
+		loadBtn.innerText = "Reload Dashboard";
+	});
+}
+
+const startBtn = document.getElementById("start-btn");
+if (startBtn != null) {
+	startBtn.addEventListener("click", async () => {
+		lastPlayerPoint();
+		restartGame();
+		await loadQuestions();
+		showQuestion();
+	});
+}
+
+const option1 = document.getElementById("option1");
+if (option1 != null) {
+	option1.addEventListener("click", () => {
+		let answer = option1.innerText;
+
+		checkAnswer(answer, questions[counter - 1].correctAnswer);
+
+		// Show next question
+		if (counter !== 0) {
+			showQuestion();
+		} else {
+			changeDisplay(["question-card"], "none");
+			changeDisplay(["start-btn"], "inline-block");
+			startBtn.innerText = "Star again";
+		}
+	});
+}
+
+const option2 = document.getElementById("option2");
+if (option2 != null) {
+	option2.addEventListener("click", () => {
+		let answer = option2.innerText;
+
+		checkAnswer(answer, questions[counter - 1].correctAnswer);
+
+		// Show next question
+		if (counter !== 0) {
+			showQuestion();
+		} else {
+			changeDisplay(["question-card"], "none");
+			changeDisplay(["start-btn"], "inline-block");
+			startBtn.innerText = "Star again";
+		}
+	});
+}
+
+const option3 = document.getElementById("option3");
+if (option3 != null) {
+	option3.addEventListener("click", () => {
+		let answer = option3.innerText;
+
+		checkAnswer(answer, questions[counter - 1].correctAnswer);
+
+		// Show next question
+		if (counter !== 0) {
+			showQuestion();
+		} else {
+			changeDisplay(["question-card"], "none");
+			changeDisplay(["start-btn"], "inline-block");
+			startBtn.innerText = "Star again";
+		}
+	});
+}
+
+const option4 = document.getElementById("option4");
+if (option4 != null) {
+	option4.addEventListener("click", () => {
+		let answer = option4.innerText;
+
+		checkAnswer(answer, questions[counter - 1].correctAnswer);
+
+		// Show next question
+		if (counter !== 0) {
+			showQuestion();
+		} else {
+			changeDisplay(["question-card"], "none");
+			changeDisplay(["start-btn"], "inline-block");
+			startBtn.innerText = "Star again";
+		}
+	});
 }
 
 function showPlayerName() {
-	// Mostrar el nombre del jugador en pantalla editando el texto de #player
-	alert(`Welcome ${playerName} to Quiz game`);
-
+	const playerNameInput = document.getElementById("player-name-input");
 	let player = document.getElementById("player");
 
-	player.innerHTML = `Player: ${playerName}`;
+	if ([null, undefined, ""].includes(playerNameInput.value)) {
+		alert("Plase insert a name to continue.");
+	} else {
+		player.innerHTML = `Player: ${playerNameInput.value}`;
+
+		changeDisplay(["form-player"], "none");
+		changeDisplay(["status", "start-btn-container"], "block");
+	}
 }
 
 function Question(category, difficulty, question, correctAnswer, answers) {
@@ -62,54 +153,57 @@ async function getQuestions(url) {
 	}
 }
 
-async function makeQuestion() {
-	let buttonStart = document.getElementById("btn-start");
-	buttonStart = buttonStart.getElementsByClassName("btn");
-	buttonStart[0].className += " disabled";
+async function loadQuestions() {
+	changeDisplay(["start-btn"], "none");
+	changeDisplay(["loading-spinner"], "block");
 
-	let questionCounter = document.getElementById("question-counter");
-	let counter = 0;
-	let points = document.getElementById("points");
-	let point = 0;
+	await getQuestions(URLAPI.noCategory);
 
-	let questionText = document.getElementById("question");
+	changeDisplay(["welcome", "loading-spinner"], "none");
+	changeDisplay(["question-card"], "block");
+}
 
-	let options = [
+function showQuestion() {
+	const questionCounter = document.getElementById("question-counter");
+	const questionText = document.getElementById("question");
+	const options = [
 		document.getElementById("option1"),
 		document.getElementById("option2"),
 		document.getElementById("option3"),
 		document.getElementById("option4"),
 	];
 
-	await getQuestions(URLAPI.noCategory);
+	// print question
+	questionText.innerText = questions[counter].question;
 
-	questions.forEach((q) => {
-		questionCounter.innerHTML = `Question ${++counter} of ${questions.length}`;
-		questionText.innerHTML = q.question;
+	// print options
+	for (let i = 0; i < questions[counter].answers.length; i++) {
+		const answer = questions[counter].answers[i];
+		options[i].innerHTML = answer;
+	}
 
-		for (let i = 0; i < q.answers.length; i++) {
-			const answer = q.answers[i];
-			options[i].innerHTML = answer;
-		}
-
-		answer = prompt(`${q.question}\n\nType the correct one:\n\n${q.answers.join("\n")}`);
-
-		answerIsCorrect = checkAnswer(answer, q.correctAnswer);
-
-		if (answerIsCorrect) {
-			alert("Your answer is correct!");
-			point++;
-			points.innerHTML = `Points: ${point}`;
-		} else {
-			alert("Your answer is incorrect, try again.");
-		}
-	});
+	// Update player status
+	questionText.innerHTML = questions[counter].question;
+	questionCounter.innerHTML = `Question ${++counter} of ${questions.length}`;
 }
 
 function checkAnswer(answer, correctAnswer) {
+	let answerIsCorrect = false;
+	const points = document.getElementById("points");
+
 	if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-		return true;
+		answerIsCorrect = true;
 	}
+
+	if (answerIsCorrect) {
+		alert("Your answer is correct!");
+		points.innerHTML = `Points: ${++point}`;
+	} else {
+		alert("Your answer is incorrect.");
+	}
+
+	// Reset counter when reach last question
+	counter = counter === questions.length ? 0 : counter;
 }
 
 function shuffler(answers) {
@@ -119,4 +213,67 @@ function shuffler(answers) {
 		.map(({ answer }) => answer);
 
 	return shuffled;
+}
+
+function changeDisplay(elIds, value) {
+	for (const elId of elIds) {
+		const el = document.getElementById(elId);
+		el.style.display = value;
+	}
+}
+
+async function loadDashboard() {
+	const tBody = document.getElementById("tbody");
+	tBody.innerHTML = "";
+
+	await fetch("../assets/database.json")
+		.then((response) => response.json())
+		.then((json) => {
+			let dbData = json;
+			let i = 1;
+			dbData.sort((a, b) => b.points - a.points);
+
+			dbData.forEach((el) => {
+				let tr = document.createElement("tr");
+
+				tr.innerHTML = `
+				<tr>
+					<th scope="row">${i}</th>
+					<td>${el.player}</td>
+					<td>${el.points}</td>
+				</tr>
+				`;
+
+				tBody.appendChild(tr);
+
+				i++;
+			});
+		});
+}
+
+function lastPlayerPoint() {
+	sessionStorage.clear();
+
+	sessionStorage.setItem("playerName", document.getElementById("player-name-input").value);
+	let playerName = sessionStorage.getItem("playerName");
+
+	sessionStorage.setItem("playerPoints", point);
+	let playerPoints = sessionStorage.getItem("playerPoints");
+
+	if (point !== 0) {
+		const playerLastPoints = document.getElementById("player-last-points");
+		playerLastPoints.innerHTML = `Last play: ${playerName} | Points: ${playerPoints}`;
+	}
+}
+
+function restartGame() {
+	questions = [];
+	counter = 0;
+	point = 0;
+
+	const points = document.getElementById("points");
+	points.innerHTML = `Points: 0`;
+
+	const timer = document.getElementById("timer");
+	timer.innerHTML = `timer: 00:00`;
 }

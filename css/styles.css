@@ -20,32 +20,86 @@ main {
   width: 80%;
   margin: auto; }
 
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .disabled {
+  background-color: #fd7014 !important;
+  border-color: #fd7014 !important; }
+  .btn-primary:focus, .disabled:focus {
+    box-shadow: none; }
+
 header {
   color: #fd7014; }
 
 .menu {
   justify-content: center; }
 
+h1 {
+  text-align: center;
+  color: #fd7014;
+  margin-bottom: 50px; }
+
+#form-player {
+  text-align: center; }
+  #form-player form .form-group {
+    margin-bottom: 20px; }
+    #form-player form .form-group label {
+      color: #fd7014;
+      margin-bottom: 10px; }
+    #form-player form .form-group .form-control {
+      margin: auto;
+      width: 50%; }
+  #form-player .btn {
+    width: 20%; }
+
 #status {
-  text-align: right; }
+  text-align: right;
+  display: none; }
+  #status .player-last-points {
+    display: none; }
   #status .status-text {
     color: #fd7014;
     font-size: large;
     line-height: 0.5; }
 
+#loading-spinner {
+  display: none;
+  width: 7rem;
+  height: 7rem;
+  margin: auto; }
+
+.text-primary {
+  --bs-primary-rgb: 253, 112, 20; }
+
 #question-card {
+  display: none;
   margin: auto;
   width: 70%; }
   #question-card h1 {
     color: #fd7014;
     text-align: center; }
-  #question-card a {
-    display: block;
-    margin-bottom: 15px; }
+  #question-card .options {
+    width: 50%;
+    margin: auto; }
+    #question-card .options a {
+      display: block;
+      margin-bottom: 15px; }
 
-#btn-start {
+#start-btn-container {
+  display: none;
   text-align: center; }
-  #btn-start .btn {
+  #start-btn-container #start-btn {
     width: 30%;
     line-height: 3;
     font-size: x-large; }
+
+.load-container {
+  width: 70%;
+  margin: auto; }
+
+.table {
+  width: 70%;
+  margin: auto; }
+  .table td, .table th {
+    color: #fd7014; }
+
+.table-dark {
+  --bs-table-striped-color: #feb686; }
