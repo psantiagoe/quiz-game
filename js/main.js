@@ -21,11 +21,6 @@ $("#start-btn").click(() => {
 	loadQuestions();
 });
 
-$("#load-btn").click(() => {
-	loadDashboard();
-	$("#load-btn").text("Reload Dashboard");
-});
-
 function showPlayerName() {
 	const playerNameInput = $("#player-name-input").val();
 
@@ -156,33 +151,6 @@ function changeDisplay(elIds, value) {
 	for (const elId of elIds) {
 		$(`#${elId}`).css("display", value);
 	}
-}
-
-function loadDashboard() {
-	$("#tbody").empty();
-
-	$.ajax({
-		url: "../assets/database.json",
-		data: {},
-		type: "GET",
-		// async: false,
-		success: function (response) {
-			let i = 1;
-			response.sort((a, b) => b.points - a.points);
-
-			response.forEach((player) => {
-				$("#tbody").append(`
-				<tr>
-					<th scope="row">${i}</th>
-					<td>${player.player}</td>
-					<td>${player.points}</td>
-				</tr>
-				`);
-
-				i++;
-			});
-		},
-	});
 }
 
 function lastPlayerPoint() {
