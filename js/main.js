@@ -21,16 +21,30 @@ $("#start-btn").click(() => {
 	loadQuestions();
 });
 
+$("#popup-close-btn").click(() => {
+	changeDisplay(["popup"], false);
+});
+
 function showPlayerName() {
 	const playerNameInput = $("#player-name-input").val();
 
 	if ([null, undefined, ""].includes(playerNameInput)) {
 		alert("Please insert a name to continue.");
 	} else {
+		$("#popup").prepend(
+			`<p>We are pleased to give you a warm welcome ${playerNameInput}
+            	<br>
+            	Let's start!
+        	</p>`
+		);
+
+		$("#popup").fadeIn(1000).delay(2000).fadeOut(1500);
+		// $("#popup").fadeIn(1000);
+
 		$("#player").text(`Player: ${playerNameInput}`);
 
-		changeDisplay(["form-player"], "none");
-		changeDisplay(["status", "start-btn-container"], "block");
+		changeDisplay(["form-player"], false);
+		changeDisplay(["status", "start-btn-container"], true);
 	}
 }
 
@@ -46,8 +60,8 @@ function getQuestions(url) {
 	// get question from API
 	$.ajax({
 		beforeSend: () => {
-			changeDisplay(["start-btn"], "none");
-			changeDisplay(["loading-spinner"], "block");
+			changeDisplay(["start-btn"], false);
+			changeDisplay(["loading-spinner"], true);
 		},
 		url: url,
 		data: {},
@@ -77,8 +91,8 @@ function getQuestions(url) {
 				questions[i].answers = shuffler(questions[i].answers);
 			}
 
-			changeDisplay(["welcome", "loading-spinner"], "none");
-			changeDisplay(["question-card"], "block");
+			changeDisplay(["welcome", "loading-spinner"], false);
+			changeDisplay(["question-card"], true);
 
 			showQuestion();
 		},
@@ -109,8 +123,8 @@ function showQuestion() {
 			if (counter !== 0) {
 				showQuestion();
 			} else {
-				changeDisplay(["question-card"], "none");
-				changeDisplay(["start-btn"], "inline-block");
+				changeDisplay(["question-card"], false);
+				changeDisplay(["start-btn"], true);
 				$("#start-btn").text("Star again");
 			}
 		});
@@ -147,9 +161,13 @@ function shuffler(answers) {
 	return shuffled;
 }
 
-function changeDisplay(elIds, value) {
-	for (const elId of elIds) {
-		$(`#${elId}`).css("display", value);
+function changeDisplay(tagsIds, show) {
+	for (const tagId of tagsIds) {
+		if (show === true) {
+			$(`#${tagId}`).show();
+		} else {
+			$(`#${tagId}`).hide();
+		}
 	}
 }
 
