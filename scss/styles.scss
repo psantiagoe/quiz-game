@@ -22,12 +22,18 @@ main {
 }
 
 // Bootstrap style changes
+.btn {
+	border: 0;
+}
+
 .btn-primary {
 	background-color: $primaryColor !important;
 	border-color: $primaryColor !important;
 
 	&:hover {
-		@extend .btn-primary;
+		// @extend .btn-primary;
+		background-color: rgba($color: $primaryColor, $alpha: 0.5) !important;
+		border-color: rgba($color: $primaryColor, $alpha: 0.5) !important;
 	}
 
 	&:focus {
@@ -81,6 +87,10 @@ h1 {
 
 	.btn {
 		width: 20%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin-bottom: 15px;
+		box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
 	}
 }
 
@@ -99,30 +109,47 @@ h1 {
 	}
 }
 
-#loading-spinner {
-	display: none;
-	width: 7rem;
-	height: 7rem;
-	margin: auto;
-}
-
-#question-card {
-	display: none;
-	margin: auto;
-	width: 70%;
-
-	h1 {
-		color: $primaryColor;
-		text-align: center;
+#question-container {
+	#loading-spinner {
+		display: none;
+		width: 7rem;
+		height: 7rem;
+		margin: auto;
 	}
 
-	.options {
-		width: 50%;
+	#question-card {
+		display: none;
 		margin: auto;
+		width: 70%;
+		background: linear-gradient(180deg, rgba(57, 62, 70, 1) 0%, rgba(57, 62, 70, 0.5) 100%);
+		border-radius: 20px;
+		box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
 
-		a {
-			display: block;
-			margin-bottom: 15px;
+		h1 {
+			margin-bottom: 0;
+			font-size: 2rem;
+			color: $primaryColor;
+			text-align: center;
+		}
+
+		.divider {
+			border: 1px solid rgba($color: $secundaryColor, $alpha: 0.2);
+			width: 100%;
+			margin: 20px 0;
+			box-shadow: 2px 1px 1px rgba($color: black, $alpha: 0.2);
+		}
+
+		.options {
+			width: 50%;
+			margin: auto;
+
+			a {
+				display: block;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-bottom: 15px;
+				box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
+			}
 		}
 	}
 }
@@ -172,5 +199,12 @@ h1 {
 		background-color: $secundaryBgColor;
 		padding: 5px;
 		border-radius: 5px;
+		box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
+	}
+}
+
+@media only screen and (min-width: 1100px) {
+	main {
+		width: 50%;
 	}
 }

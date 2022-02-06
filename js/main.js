@@ -128,7 +128,7 @@ function showQuestion() {
 
 				changeDisplay(["question-card"], false);
 				changeDisplay(["start-btn"], true);
-				$("#start-btn").text("Star again");
+				$("#start-btn").text("Start again");
 			}
 		});
 	}
@@ -144,17 +144,20 @@ function checkAnswer(answer, correctAnswer) {
 		answerIsCorrect = true;
 	}
 
-	if (answerIsCorrect) {
-		$("#alert-answer").empty();
-		$("#alert-answer").append(`<p>Your answer is correct! &#128512;</p>`);
-		$("#alert-answer").fadeIn(1000).fadeOut(1500);
+	counter === 0 ? $("#alert-answer").fadeIn() : false;
 
+	if (answerIsCorrect) {
+		$("#alert-answer").append(
+			`<p id="alert${counter}" style="display: none;">Your answer is correct! &#128512;</p>`
+		);
 		$("#points").html(`Points: ${++point}`);
 	} else {
-		$("#alert-answer").empty();
-		$("#alert-answer").append(`<p>Your answer is incorrect. &#128517;</p>`);
-		$("#alert-answer").fadeIn(1000).fadeOut(1500);
+		$("#alert-answer").append(
+			`<p id="alert${counter}" style="display: none;">Your answer is incorrect. &#128517;</p>`
+		);
 	}
+
+	$(`#alert${counter}`).slideDown(1000).delay(2000).slideUp(1500);
 
 	// Reset counter when reach last question
 	counter = counter === questions.length ? 0 : counter;
@@ -200,6 +203,7 @@ function restartGame() {
 
 	$("#points").html(`Points: 0`);
 	$("#timer").html(`Timer: 00:00:00`);
+	$("#alert-answer").empty();
 }
 
 function startTimer() {
