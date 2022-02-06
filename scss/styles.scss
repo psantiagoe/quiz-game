@@ -1,5 +1,6 @@
 @import "./imports/_variables.scss";
 @import "./imports/_general-classes.scss";
+@import "./imports/dashboard.scss";
 
 // General
 html {
@@ -20,6 +21,7 @@ main {
 	margin: auto;
 }
 
+// Bootstrap style changes
 .btn-primary {
 	background-color: $primaryColor !important;
 	border-color: $primaryColor !important;
@@ -38,11 +40,16 @@ main {
 	@extend .btn-primary;
 }
 
+.text-primary {
+	--bs-primary-rgb: 253, 112, 20;
+}
+
 // header
 header {
 	color: $primaryColor;
 	box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
 }
+
 .menu {
 	justify-content: center;
 }
@@ -99,10 +106,6 @@ h1 {
 	margin: auto;
 }
 
-.text-primary {
-	--bs-primary-rgb: 253, 112, 20;
-}
-
 #question-card {
 	display: none;
 	margin: auto;
@@ -135,27 +138,6 @@ h1 {
 	}
 }
 
-.load-container {
-	width: 70%;
-	margin: auto;
-}
-
-.table {
-	width: 70%;
-	margin: auto;
-	td {
-		color: $primaryColor;
-	}
-
-	th {
-		@extend td;
-	}
-}
-
-.table-dark {
-	--bs-table-striped-color: #feb686;
-}
-
 #popup {
 	display: none;
 	width: 50%;
@@ -176,19 +158,19 @@ h1 {
 }
 
 #alert-answer {
-	@extend #popup;
-	width: auto;
 	max-width: 30%;
-	top: auto;
-	left: auto;
+	position: absolute;
 	bottom: 20%;
 	right: 10%;
-	transform: none;
-	padding: 5px;
 
 	p {
 		margin-left: 5px;
 		margin-right: 5px;
-		margin-bottom: 0;
+		margin-bottom: 10px;
+		font-size: large;
+		color: $primaryColor;
+		background-color: $secundaryBgColor;
+		padding: 5px;
+		border-radius: 5px;
 	}
 }

@@ -1,0 +1,21 @@
+// Bootstrap style changes
+.table-dark {
+	--bs-table-striped-color: #feb686;
+}
+
+.load-container {
+	width: 70%;
+	margin: auto;
+}
+
+.table {
+	width: 70%;
+	margin: auto;
+	td {
+		color: $primaryColor;
+	}
+
+	th {
+		@extend td;
+	}
+}
