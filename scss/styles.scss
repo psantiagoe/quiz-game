@@ -168,9 +168,27 @@ h1 {
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
-	font-size: large;
 
 	p {
+		font-size: large;
 		color: $primaryColor;
+	}
+}
+
+#alert-answer {
+	@extend #popup;
+	width: auto;
+	max-width: 30%;
+	top: auto;
+	left: auto;
+	bottom: 20%;
+	right: 10%;
+	transform: none;
+	padding: 5px;
+
+	p {
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 0;
 	}
 }

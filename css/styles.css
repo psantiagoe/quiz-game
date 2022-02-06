@@ -105,7 +105,7 @@ h1 {
 .table-dark {
   --bs-table-striped-color: #feb686; }
 
-#popup {
+#popup, #alert-answer {
   display: none;
   width: 50%;
   text-align: center;
@@ -116,7 +116,21 @@ h1 {
   background-color: #393e46;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
-  font-size: large; }
-  #popup p {
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2); }
+  #popup p, #alert-answer p {
+    font-size: large;
     color: #fd7014; }
+
+#alert-answer {
+  width: auto;
+  max-width: 30%;
+  top: auto;
+  left: auto;
+  bottom: 20%;
+  right: 10%;
+  transform: none;
+  padding: 5px; }
+  #alert-answer p {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 0; }

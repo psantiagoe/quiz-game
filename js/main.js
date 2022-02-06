@@ -1,6 +1,7 @@
 let questions = [];
 let counter = 0;
 let point = 0;
+let timer = null;
 
 const URLAPI = {
 	noCategory: "https://opentdb.com/api.php?amount=10&type=multiple",
@@ -31,15 +32,14 @@ function showPlayerName() {
 	if ([null, undefined, ""].includes(playerNameInput)) {
 		alert("Please insert a name to continue.");
 	} else {
-		$("#popup").prepend(
-			`<p>We are pleased to give you a warm welcome ${playerNameInput}
+		$("#popup").prepend(`
+			<p>We are pleased to give you a warm welcome ${playerNameInput}
             	<br>
             	Let's start!
-        	</p>`
-		);
+        	</p>
+			`);
 
 		$("#popup").fadeIn(1000).delay(2000).fadeOut(1500);
-		// $("#popup").fadeIn(1000);
 
 		$("#player").text(`Player: ${playerNameInput}`);
 
@@ -95,6 +95,7 @@ function getQuestions(url) {
 			changeDisplay(["question-card"], true);
 
 			showQuestion();
+			startTimer();
 		},
 	});
 }
@@ -123,6 +124,8 @@ function showQuestion() {
 			if (counter !== 0) {
 				showQuestion();
 			} else {
+				clearInterval(timer);
+
 				changeDisplay(["question-card"], false);
 				changeDisplay(["start-btn"], true);
 				$("#start-btn").text("Star again");
@@ -142,10 +145,15 @@ function checkAnswer(answer, correctAnswer) {
 	}
 
 	if (answerIsCorrect) {
-		alert("Your answer is correct!");
+		$("#alert-answer").empty();
+		$("#alert-answer").append(`<p>Your answer is correct! &#128512;</p>`);
+		$("#alert-answer").fadeIn(1000).fadeOut(1500);
+
 		$("#points").html(`Points: ${++point}`);
 	} else {
-		alert("Your answer is incorrect.");
+		$("#alert-answer").empty();
+		$("#alert-answer").append(`<p>Your answer is incorrect. &#128517;</p>`);
+		$("#alert-answer").fadeIn(1000).fadeOut(1500);
 	}
 
 	// Reset counter when reach last question
@@ -191,5 +199,31 @@ function restartGame() {
 	point = 0;
 
 	$("#points").html(`Points: 0`);
-	$("#timer").html(`timer: 00:00`);
+	$("#timer").html(`Timer: 00:00:00`);
+}
+
+function startTimer() {
+	let seconds = 0;
+	let minutes = 0;
+	let hours = 0;
+
+	timer = setInterval(function () {
+		seconds++;
+
+		if (seconds === 60) {
+			seconds = 0;
+			minutes++;
+		}
+
+		if (minutes === 60) {
+			minutes = 0;
+			hours++;
+		}
+
+		let txtHours = hours.toString().padStart(2, 0);
+		let txtMinutes = minutes.toString().padStart(2, 0);
+		let txtSeconds = seconds.toString().padStart(2, 0);
+
+		$("#timer").html(`Timer: ${txtHours}:${txtMinutes}:${txtSeconds}`);
+	}, 1000);
 }
