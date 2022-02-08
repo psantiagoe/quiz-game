@@ -23,7 +23,6 @@ function Question(category, difficulty, question, correctAnswer, answers) {
 }
 
 $(document).ready(() => {
-	console.log("ready!");
 	playerName = sessionStorage.getItem("playerName");
 
 	if (![null, undefined, ""].includes(playerName)) {
@@ -32,7 +31,6 @@ $(document).ready(() => {
 });
 
 $("#submit-name").click((e) => {
-	e.preventDefault;
 	showPlayerName();
 });
 
