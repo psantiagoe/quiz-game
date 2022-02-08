@@ -43,7 +43,8 @@ main {
     background-color: rgba(253, 112, 20, 0.5) !important;
     border-color: rgba(253, 112, 20, 0.5) !important; }
   .btn-primary:focus, .disabled:focus {
-    box-shadow: none; }
+    box-shadow: none;
+    outline: none; }
 
 .text-primary {
   --bs-primary-rgb: 253, 112, 20; }
@@ -51,9 +52,6 @@ main {
 header {
   color: #fd7014;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); }
-
-.menu {
-  justify-content: center; }
 
 h1 {
   text-align: center;
@@ -82,10 +80,15 @@ h1 {
   display: none; }
   #status .player-last-points {
     display: none; }
-  #status .status-text {
+  #status p {
     color: #fd7014;
     font-size: large;
     line-height: 0.5; }
+  #status #dropdownMenuButton {
+    margin-bottom: 16px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); }
+  #status .dropdown-toggle {
+    min-width: 180px; }
 
 #question-container #loading-spinner {
   display: none;
@@ -162,4 +165,6 @@ h1 {
 
 @media only screen and (min-width: 1100px) {
   main {
-    width: 50%; } }
+    width: 50%; }
+  #popup {
+    width: 30%; } }

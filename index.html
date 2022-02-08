@@ -26,19 +26,6 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Categories
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">General knowledge</a></li>
-                                <li><a class="dropdown-item" href="#">Film</a></li>
-                                <li><a class="dropdown-item" href="#">Music</a></li>
-                                <li><a class="dropdown-item" href="#">Video games</a></li>
-                                <li><a class="dropdown-item" href="#">Computers</a></li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./pages/dashboard.html">Dashboard</a>
                         </li>
@@ -62,11 +49,26 @@
         </section>
 
         <section id="status">
-            <p id="player-last-points" class="status-text"></p>
-            <p id="player" class="status-text">Player: player-name</p>
-            <p id="timer" class="status-text">Time: 00:00</p>
-            <p id="points" class="status-text">Points: 0</p>
-            <p id="question-counter" class="status-text">Question 0 of 10</p>
+            <p id="player-last-points"></p>
+            <p id="player">Player: player-name</p>
+            <p id="timer">Time: 00:00</p>
+            <p id="points">Points: 0</p>
+            <p id="question-counter" class="status-text">Question 0 of 0</p>
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" role="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select a category
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="dropdown-item category">Random</button>
+                    <button class="dropdown-item category">General knowledge</button>
+                    <button class="dropdown-item category">Film</button>
+                    <button class="dropdown-item category">Music</button>
+                    <button class="dropdown-item category">Video Games</button>
+                    <button class="dropdown-item category">Computers</button>
+                </div>
+            </div>
         </section>
 
         <section id="question-container">
@@ -81,7 +83,7 @@
         </section>
 
         <div id="start-btn-container">
-            <a id="start-btn" class="btn btn-primary">Start</a>
+            <a id="start-btn" class="btn btn-primary disabled">Start</a>
         </div>
     </main>
 
@@ -98,19 +100,6 @@
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">General knowledge</a></li>
-                        <li><a class="dropdown-item" href="#">Film</a></li>
-                        <li><a class="dropdown-item" href="#">Music</a></li>
-                        <li><a class="dropdown-item" href="#">Video games</a></li>
-                        <li><a class="dropdown-item" href="#">Computers</a></li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link text-muted" href="./pages/dashboard.html">Dashboard</a>
                 </li>

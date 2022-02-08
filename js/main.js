@@ -2,15 +2,24 @@ let questions = [];
 let counter = 0;
 let point = 0;
 let timer = null;
+let urlCategorySelected = "";
 
 const URLAPI = {
-	noCategory: "https://opentdb.com/api.php?amount=10&type=multiple",
+	random: "https://opentdb.com/api.php?amount=10&type=multiple",
 	generalKnowledge: "https://opentdb.com/api.php?amount=10&category=9&type=multiple",
 	film: "https://opentdb.com/api.php?amount=10&category=11&type=multiple",
 	music: "https://opentdb.com/api.php?amount=10&category=12&type=multiple",
 	videoGames: "https://opentdb.com/api.php?amount=10&category=15&type=multiple",
 	computers: "https://opentdb.com/api.php?amount=10&category=18&type=multiple",
 };
+
+function Question(category, difficulty, question, correctAnswer, answers) {
+	this.category = category;
+	this.difficulty = difficulty;
+	this.question = question;
+	this.correctAnswer = correctAnswer;
+	this.answers = answers;
+}
 
 $("#submit-name").click(() => {
 	showPlayerName();
@@ -20,10 +29,15 @@ $("#start-btn").click(() => {
 	lastPlayerPoint();
 	restartGame();
 	loadQuestions();
+	$("#dropdownMenuButton").addClass("disabled");
 });
 
 $("#popup-close-btn").click(() => {
 	changeDisplay(["popup"], false);
+});
+
+$(".category").click((e) => {
+	selectCategory(e.target.innerText);
 });
 
 function showPlayerName() {
@@ -46,14 +60,6 @@ function showPlayerName() {
 		changeDisplay(["form-player"], false);
 		changeDisplay(["status", "start-btn-container"], true);
 	}
-}
-
-function Question(category, difficulty, question, correctAnswer, answers) {
-	this.category = category;
-	this.difficulty = difficulty;
-	this.question = question;
-	this.correctAnswer = correctAnswer;
-	this.answers = answers;
 }
 
 function getQuestions(url) {
@@ -100,8 +106,17 @@ function getQuestions(url) {
 	});
 }
 
+function selectCategory(textBtn) {
+	$("#start-btn").removeClass("disabled");
+	$("#dropdownMenuButton").text(textBtn);
+
+	textBtn = camelize(textBtn);
+
+	urlCategorySelected = URLAPI[textBtn];
+}
+
 function loadQuestions() {
-	getQuestions(URLAPI.noCategory);
+	getQuestions(urlCategorySelected);
 }
 
 function showQuestion() {
@@ -129,6 +144,7 @@ function showQuestion() {
 				changeDisplay(["question-card"], false);
 				changeDisplay(["start-btn"], true);
 				$("#start-btn").text("Start again");
+				$("#dropdownMenuButton").removeClass("disabled");
 			}
 		});
 	}
@@ -230,4 +246,12 @@ function startTimer() {
 
 		$("#timer").html(`Timer: ${txtHours}:${txtMinutes}:${txtSeconds}`);
 	}, 1000);
+}
+
+function camelize(string) {
+	return string
+		.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+			return index === 0 ? word.toLowerCase() : word.toUpperCase();
+		})
+		.replace(/\s+/g, "");
 }

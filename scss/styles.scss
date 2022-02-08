@@ -39,6 +39,7 @@ main {
 	&:focus {
 		@extend .btn-primary;
 		box-shadow: none;
+		outline: none;
 	}
 }
 
@@ -54,10 +55,6 @@ main {
 header {
 	color: $primaryColor;
 	box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
-}
-
-.menu {
-	justify-content: center;
 }
 
 // main
@@ -102,10 +99,19 @@ h1 {
 		display: none;
 	}
 
-	.status-text {
+	p {
 		color: $primaryColor;
 		font-size: large;
 		line-height: 0.5;
+	}
+
+	#dropdownMenuButton {
+		margin-bottom: 16px;
+		box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
+	}
+
+	.dropdown-toggle {
+		min-width: 180px;
 	}
 }
 
@@ -206,5 +212,9 @@ h1 {
 @media only screen and (min-width: 1100px) {
 	main {
 		width: 50%;
+	}
+
+	#popup {
+		width: 30%;
 	}
 }
