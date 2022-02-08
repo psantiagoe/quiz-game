@@ -1,9 +1,0 @@
-.align-horizontally {
-	display: flex;
-	justify-content: center;
-}
-
-.align-vertically {
-	@extend .align-horizontally;
-	align-items: center;
-}

@@ -1,5 +1,4 @@
 @import "./imports/_variables.scss";
-@import "./imports/_general-classes.scss";
 @import "./imports/dashboard.scss";
 
 // General
@@ -92,26 +91,45 @@ h1 {
 }
 
 #status {
-	text-align: right;
 	display: none;
 
-	.player-last-points {
-		display: none;
+	.container {
+		.row {
+			place-content: center;
+		}
+
+		.container-item {
+			background: linear-gradient(180deg, rgba(57, 62, 70, 1) 0%, rgba(57, 62, 70, 0.5) 100%);
+			border-radius: 20px;
+			box-shadow: 10px 5px 5px rgba($color: black, $alpha: 0.2);
+			margin-bottom: 20px;
+			padding: 10px;
+
+			img {
+				width: 40px;
+			}
+
+			p {
+				display: inline-block;
+				margin-bottom: 8px;
+			}
+		}
 	}
 
 	p {
 		color: $primaryColor;
 		font-size: large;
-		line-height: 0.5;
 	}
 
-	#dropdownMenuButton {
-		margin-bottom: 16px;
-		box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
-	}
+	.dropdown {
+		#dropdownMenuButton {
+			margin-bottom: 16px;
+			box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
+		}
 
-	.dropdown-toggle {
-		min-width: 180px;
+		.dropdown-toggle {
+			min-width: 180px;
+		}
 	}
 }
 

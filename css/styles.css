@@ -1,10 +1,3 @@
-.align-horizontally, .align-vertically {
-  display: flex;
-  justify-content: center; }
-
-.align-vertically {
-  align-items: center; }
-
 .table-dark {
   --bs-table-striped-color: #feb686; }
 
@@ -76,18 +69,27 @@ h1 {
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2); }
 
 #status {
-  text-align: right;
   display: none; }
-  #status .player-last-points {
-    display: none; }
+  #status .container .row {
+    place-content: center; }
+  #status .container .container-item {
+    background: linear-gradient(180deg, #393e46 0%, rgba(57, 62, 70, 0.5) 100%);
+    border-radius: 20px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    padding: 10px; }
+    #status .container .container-item img {
+      width: 40px; }
+    #status .container .container-item p {
+      display: inline-block;
+      margin-bottom: 8px; }
   #status p {
     color: #fd7014;
-    font-size: large;
-    line-height: 0.5; }
-  #status #dropdownMenuButton {
+    font-size: large; }
+  #status .dropdown #dropdownMenuButton {
     margin-bottom: 16px;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); }
-  #status .dropdown-toggle {
+  #status .dropdown .dropdown-toggle {
     min-width: 180px; }
 
 #question-container #loading-spinner {

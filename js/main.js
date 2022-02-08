@@ -3,6 +3,7 @@ let counter = 0;
 let point = 0;
 let timer = null;
 let urlCategorySelected = "";
+let playerName = "";
 
 const URLAPI = {
 	random: "https://opentdb.com/api.php?amount=10&type=multiple",
@@ -21,12 +22,21 @@ function Question(category, difficulty, question, correctAnswer, answers) {
 	this.answers = answers;
 }
 
-$("#submit-name").click(() => {
+$(document).ready(() => {
+	console.log("ready!");
+	playerName = sessionStorage.getItem("playerName");
+
+	if (![null, undefined, ""].includes(playerName)) {
+		showPlayerName();
+	}
+});
+
+$("#submit-name").click((e) => {
+	e.preventDefault;
 	showPlayerName();
 });
 
 $("#start-btn").click(() => {
-	lastPlayerPoint();
 	restartGame();
 	loadQuestions();
 	$("#dropdownMenuButton").addClass("disabled");
@@ -41,13 +51,16 @@ $(".category").click((e) => {
 });
 
 function showPlayerName() {
-	const playerNameInput = $("#player-name-input").val();
+	if ([null, undefined, ""].includes(playerName)) {
+		playerName = $("#player-name-input").val();
+		storePlayerName();
+	}
 
-	if ([null, undefined, ""].includes(playerNameInput)) {
+	if ([null, undefined, ""].includes(playerName)) {
 		alert("Please insert a name to continue.");
 	} else {
 		$("#popup").prepend(`
-			<p>We are pleased to give you a warm welcome ${playerNameInput}
+			<p>We are pleased to give you a warm welcome ${playerName}
             	<br>
             	Let's start!
         	</p>
@@ -55,7 +68,7 @@ function showPlayerName() {
 
 		$("#popup").fadeIn(1000).delay(2000).fadeOut(1500);
 
-		$("#player").text(`Player: ${playerNameInput}`);
+		$("#player").text(`Player: ${playerName}`);
 
 		changeDisplay(["form-player"], false);
 		changeDisplay(["status", "start-btn-container"], true);
@@ -156,7 +169,7 @@ function showQuestion() {
 function checkAnswer(answer, correctAnswer) {
 	let answerIsCorrect = false;
 
-	if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+	if (answer.toLowerCase() === decodeEntities(correctAnswer.toLowerCase())) {
 		answerIsCorrect = true;
 	}
 
@@ -198,18 +211,11 @@ function changeDisplay(tagsIds, show) {
 	}
 }
 
-function lastPlayerPoint() {
+function storePlayerName() {
 	sessionStorage.clear();
 
 	sessionStorage.setItem("playerName", $("#player-name-input").val());
-	let playerName = sessionStorage.getItem("playerName");
-
-	sessionStorage.setItem("playerPoints", point);
-	let playerPoints = sessionStorage.getItem("playerPoints");
-
-	if (point !== 0) {
-		$("#player-last-points").html(`Last play: ${playerName} | Points: ${playerPoints}`);
-	}
+	playerName = sessionStorage.getItem("playerName");
 }
 
 function restartGame() {
@@ -218,14 +224,13 @@ function restartGame() {
 	point = 0;
 
 	$("#points").html(`Points: 0`);
-	$("#timer").html(`Timer: 00:00:00`);
+	$("#timer").html(`Timer: 00:00`);
 	$("#alert-answer").empty();
 }
 
 function startTimer() {
 	let seconds = 0;
 	let minutes = 0;
-	let hours = 0;
 
 	timer = setInterval(function () {
 		seconds++;
@@ -235,16 +240,10 @@ function startTimer() {
 			minutes++;
 		}
 
-		if (minutes === 60) {
-			minutes = 0;
-			hours++;
-		}
-
-		let txtHours = hours.toString().padStart(2, 0);
 		let txtMinutes = minutes.toString().padStart(2, 0);
 		let txtSeconds = seconds.toString().padStart(2, 0);
 
-		$("#timer").html(`Timer: ${txtHours}:${txtMinutes}:${txtSeconds}`);
+		$("#timer").html(`Timer: ${txtMinutes}:${txtSeconds}`);
 	}, 1000);
 }
 
@@ -255,3 +254,21 @@ function camelize(string) {
 		})
 		.replace(/\s+/g, "");
 }
+
+let decodeEntities = (function () {
+	let element = document.createElement("div");
+
+	function decodeHTMLEntities(str) {
+		if (str && typeof str === "string") {
+			str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
+			str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gim, "");
+			element.innerHTML = str;
+			str = element.textContent;
+			element.textContent = "";
+		}
+
+		return str;
+	}
+
+	return decodeHTMLEntities;
+})();

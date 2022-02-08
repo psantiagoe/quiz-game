@@ -49,26 +49,45 @@
         </section>
 
         <section id="status">
-            <p id="player-last-points"></p>
-            <p id="player">Player: player-name</p>
-            <p id="timer">Time: 00:00</p>
-            <p id="points">Points: 0</p>
-            <p id="question-counter" class="status-text">Question 0 of 0</p>
-
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" role="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select a category
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item category">Random</button>
-                    <button class="dropdown-item category">General knowledge</button>
-                    <button class="dropdown-item category">Film</button>
-                    <button class="dropdown-item category">Music</button>
-                    <button class="dropdown-item category">Video Games</button>
-                    <button class="dropdown-item category">Computers</button>
+            <div class="container">
+                <div class="row justify-content-around">
+                    <div class="col-md-auto container-item">
+                        <img src="./assets/images/man.png" alt="Player name">
+                        <p id="player">Player: player-name</p>
+                    </div>
+                    <div class="col-md-auto container-item">
+                        <img src="./assets/images/stopwatch.png" alt="Timer">
+                        <p id="timer">Time: 00:00</p>
+                    </div>
+                    <div class="col-md-auto container-item">
+                        <img src="./assets/images/star.png" alt="Player points">
+                        <p id="points">Points: 0</p>
+                    </div>
+                    <div class="col-md-auto container-item">
+                        <img src="./assets/images/question.png" alt="Question">
+                        <p id="question-counter" class="status-text">Question 0 of 0</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="dropdown col-md-auto">
+                        <button class="btn btn-primary dropdown-toggle" role="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select a category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item category">Random</button>
+                            <button class="dropdown-item category">General knowledge</button>
+                            <button class="dropdown-item category">Film</button>
+                            <button class="dropdown-item category">Music</button>
+                            <button class="dropdown-item category">Video Games</button>
+                            <button class="dropdown-item category">Computers</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
         </section>
 
         <section id="question-container">
