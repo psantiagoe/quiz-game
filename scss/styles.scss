@@ -30,7 +30,6 @@ main {
 	border-color: $primaryColor !important;
 
 	&:hover {
-		// @extend .btn-primary;
 		background-color: rgba($color: $primaryColor, $alpha: 0.5) !important;
 		border-color: rgba($color: $primaryColor, $alpha: 0.5) !important;
 	}
