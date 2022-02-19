@@ -132,14 +132,14 @@ h1 {
 	}
 }
 
-#question-container {
-	#loading-spinner {
-		display: none;
-		width: 7rem;
-		height: 7rem;
-		margin: auto;
-	}
+#loading-spinner {
+	display: none;
+	width: 7rem;
+	height: 7rem;
+	margin: auto;
+}
 
+#question-container {
 	#question-card {
 		display: none;
 		margin: auto;

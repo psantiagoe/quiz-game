@@ -1,30 +1,45 @@
+let players = [];
+
 $("#load-btn").click(() => {
+	// await getPlayers();
 	loadDashboard();
 	$("#load-btn").text("Reload Dashboard");
 });
 
-function loadDashboard() {
+async function loadDashboard() {
 	$("#tbody").empty();
 
-	$.ajax({
-		url: "../assets/database.json",
-		data: {},
-		type: "GET",
-		success: function (response) {
-			let i = 1;
-			response.sort((a, b) => b.points - a.points);
+	$("#loading-spinner").show();
 
-			response.forEach((player) => {
-				$("#tbody").append(`
-				<tr>
-					<th scope="row">${i}</th>
-					<td>${player.player}</td>
-					<td>${player.points}</td>
-				</tr>
-				`);
+	await getPlayers();
+	$("#loading-spinner").hide();
 
-				i++;
-			});
-		},
+	let i = 1;
+
+	players.sort((a, b) => b.points - a.points);
+
+	players.forEach((player) => {
+		$("#tbody").append(`
+		<tr>
+			<th scope="row">${i}</th>
+			<td>${player.name}</td>
+			<td>${player.points}</td>
+			<td>${player.time}</td>
+		</tr>
+		`);
+
+		i++;
 	});
+}
+
+async function getPlayers() {
+	players = [];
+	await db
+		.collection("players")
+		.get()
+		.then((querySnapshot) => {
+			querySnapshot.forEach((el) => {
+				players.push(el.data().player);
+			});
+		});
 }

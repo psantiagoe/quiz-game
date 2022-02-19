@@ -1,6 +1,7 @@
 let questions = [];
 let counter = 0;
 let point = 0;
+let time = "";
 let timer = null;
 let urlCategorySelected = "";
 let playerName = "";
@@ -109,7 +110,6 @@ function getQuestions(url) {
 			}
 
 			changeDisplay(["welcome", "loading-spinner"], false);
-			changeDisplay(["question-card"], true);
 
 			showQuestion();
 			startTimer();
@@ -131,6 +131,7 @@ function loadQuestions() {
 }
 
 function showQuestion() {
+	$("#question-card").fadeIn(1000);
 	$("#question").html(questions[counter].question);
 
 	$(".options").empty();
@@ -148,14 +149,27 @@ function showQuestion() {
 
 			// Show next question
 			if (counter !== 0) {
-				showQuestion();
+				$("#question-card").fadeOut(500).fadeIn(1000);
+
+				let delay = setInterval(() => {
+					showQuestion();
+					clearInterval(delay);
+				}, 500);
 			} else {
 				clearInterval(timer);
 
-				changeDisplay(["question-card"], false);
-				changeDisplay(["start-btn"], true);
+				$("#question-card").fadeOut(2000, () => {
+					$("#start-btn").fadeIn(1000);
+				});
 				$("#start-btn").text("Start again");
 				$("#dropdownMenuButton").removeClass("disabled");
+
+				const player = {
+					name: playerName,
+					points: point,
+					time: time,
+				};
+				addPlayer(player);
 			}
 		});
 	}
@@ -241,7 +255,9 @@ function startTimer() {
 		let txtMinutes = minutes.toString().padStart(2, 0);
 		let txtSeconds = seconds.toString().padStart(2, 0);
 
-		$("#timer").html(`Timer: ${txtMinutes}:${txtSeconds}`);
+		time = `${txtMinutes}:${txtSeconds}`;
+
+		$("#timer").html(`Timer: ${time}`);
 	}, 1000);
 }
 
@@ -270,3 +286,16 @@ let decodeEntities = (function () {
 
 	return decodeHTMLEntities;
 })();
+
+function addPlayer(player) {
+	db.collection("players")
+		.add({
+			player,
+		})
+		.then((docRef) => {
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch((error) => {
+			console.error("Error adding document: ", error);
+		});
+}

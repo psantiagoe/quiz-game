@@ -3,6 +3,7 @@
 	--bs-table-striped-color: #feb686;
 }
 
+// Table
 .load-container {
 	width: 70%;
 	margin: auto;
@@ -11,6 +12,8 @@
 .table {
 	width: 70%;
 	margin: auto;
+	box-shadow: 0px 5px 5px rgba($color: black, $alpha: 0.2);
+
 	td {
 		color: $primaryColor;
 	}

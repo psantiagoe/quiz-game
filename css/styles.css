@@ -7,7 +7,8 @@
 
 .table {
   width: 70%;
-  margin: auto; }
+  margin: auto;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); }
   .table td, .table th {
     color: #fd7014; }
 
@@ -92,7 +93,7 @@ h1 {
   #status .dropdown .dropdown-toggle {
     min-width: 180px; }
 
-#question-container #loading-spinner {
+#loading-spinner {
   display: none;
   width: 7rem;
   height: 7rem;
