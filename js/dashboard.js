@@ -1,7 +1,6 @@
 let players = [];
 
 $("#load-btn").click(() => {
-	// await getPlayers();
 	loadDashboard();
 	$("#load-btn").text("Reload Dashboard");
 });
